@@ -32,3 +32,4 @@ Challenges:
 This activity was difficult though but having concept of DOM and Local storage made it a bit easy. I started my pseudo-code to work with .I went through lecture videos and also looking through a couple of examples online in order to understand jQuery code and day,date and time functions.
 
 ![image](https://user-images.githubusercontent.com/61823648/78097305-d092fc00-7390-11ea-8dcf-f1b829ea89b1.png)
+![image](https://user-images.githubusercontent.com/61823648/78097395-0afc9900-7391-11ea-92a5-c81d6b10e1b2.png)
