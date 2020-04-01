@@ -58,7 +58,19 @@ textarea{
   background-color: #77dd77;
   color: black;
 }
-
+.clearBtn {
+  border-left: 1px solid black;
+  border-top-right-radius: 12px;
+  border-bottom-right-radius: 12px;
+  background-color: red;
+  color: white;
+}
+  .clearBtn:hover {
+    font-size: 25px;
+    transition: all .3s ease-in-out;
+    cursor: pointer;
+  
+}
 .saveBtn {
   border-left: 1px solid black;
   border-top-right-radius: 15px;

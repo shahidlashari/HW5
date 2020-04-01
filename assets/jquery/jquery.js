@@ -67,7 +67,7 @@ let myDay = [
 
 // gets data for the header date
 function getHeaderDate() {
-    var currentHeaderDate = moment().format('dddd, MMMM Do');
+    var currentHeaderDate = moment().format('dddd, MMMM Do , h:mm a');
     $("#currentDay").text(currentHeaderDate);
 }
 
@@ -116,22 +116,23 @@ myDay.forEach(function (thisHour) {
     // creates schdeduler data
     var hourPlan = $("<div>")
         .attr({
-            "class": "col-md-9 description p-0"
+            "class": "col-md-8 description p-0"
         });
     var planData = $("<textarea>");
+    // planData.addClass("inputField");
     hourPlan.append(planData);
     planData.attr("id", thisHour.id);
     if (thisHour.time < moment().format("HH")) {
         planData.attr({
-            "class": "past",
+            "class": "past inputField",
         })
     } else if (thisHour.time === moment().format("HH")) {
         planData.attr({
-            "class": "present"
+            "class": "present inputField"
         })
     } else if (thisHour.time > moment().format("HH")) {
         planData.attr({
-            "class": "future"
+            "class": "future inputField"
         })
     }
 
@@ -139,22 +140,36 @@ myDay.forEach(function (thisHour) {
     var saveButton = $("<i class='far fa-save fa-lg'></i>")
     var savePlan = $("<button>")
         .attr({
-            "class": "col-md-1 saveBtn"
+            "class": "col-md-1 saveBtn "
         });
+
     savePlan.append(saveButton);
+    // creates clear button
+    // var clearButton = $("<i class='far fa-trash-alt'></i>")
+    // var clearPlan = $("<button>")
+    //     .attr({
+    //         "class": "col-md-1 clearBtn "
+    //     });
+    // clearPlan.append(clearButton);
     hourRow.append(hourField, hourPlan, savePlan);
+
 })
 
 // loads any existing localstorage data after components created
 init();
 
-
 // saves data to be used in localStorage
 $(".saveBtn").on("click", function (event) {
     event.preventDefault();
-    var saveIndex = $(this).siblings(".description").children(".future").attr("id");
-    myDay[saveIndex].reminder = $(this).siblings(".description").children(".future").val();
+    var saveIndex = $(this).siblings(".description").children(".inputField").attr("id");
     console.log(saveIndex);
+    myDay[saveIndex].reminder = $(this).siblings(".description").children(".inputField").val();
+
     saveReminders();
-    displayReminders();
+    // displayReminders();
+
 })
+// $(".clearBtn").on("click", function (event) {
+   
+//     localStorage.clear();
+// })
