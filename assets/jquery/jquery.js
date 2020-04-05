@@ -61,16 +61,25 @@ let myDay = [
         time: "17",
         meridiem: "pm",
         reminder: ""
-    },
+    }
 
 ]
 
 // gets data for the header date
 function getHeaderDate() {
-    var currentHeaderDate = moment().format('dddd, MMMM Do , h:mm a');
-    $("#currentDay").text(currentHeaderDate);
-}
+    var currentHeaderDate = moment().format('dddd, MMMM Do');
+    $("#currentDate").text(currentHeaderDate);
 
+}
+function getHeaderTime() {
+    var currentHeaderTime= moment().format('h:mm:ss a');
+        $("#currentTime").text(currentHeaderTime); 
+    setInterval(function(){ 
+        var currentHeaderTime= moment().format('h:mm:ss a');
+        $("#currentTime").text(currentHeaderTime); 
+    }, 1000);
+    
+}
 // saves data to localStorage
 function saveReminders() {
     localStorage.setItem("myDay", JSON.stringify(myDay));
@@ -97,7 +106,7 @@ function init() {
 
 // loads header date
 getHeaderDate();
-
+getHeaderTime();
 // creates the visuals for the scheduler body
 myDay.forEach(function (thisHour) {
     // creates timeblocks row
@@ -145,13 +154,13 @@ myDay.forEach(function (thisHour) {
 
     savePlan.append(saveButton);
     // creates clear button
-    // var clearButton = $("<i class='far fa-trash-alt'></i>")
-    // var clearPlan = $("<button>")
-    //     .attr({
-    //         "class": "col-md-1 clearBtn "
-    //     });
-    // clearPlan.append(clearButton);
-    hourRow.append(hourField, hourPlan, savePlan);
+    var clearButton = $("<i class='far fa-trash-alt'></i>")
+    var clearPlan = $("<button>")
+        .attr({
+            "class": "col-md-1 clearBtn "
+        });
+    clearPlan.append(clearButton);
+    hourRow.append(hourField, hourPlan, savePlan, clearPlan);
 
 })
 
@@ -169,7 +178,12 @@ $(".saveBtn").on("click", function (event) {
     // displayReminders();
 
 })
-// $(".clearBtn").on("click", function (event) {
-   
-//     localStorage.clear();
-// })
+$(".clearBtn").on("click", function (event) {
+    event.preventDefault();
+    var clearIndex = $(this).siblings(".description").children(".inputField").attr("id");
+    console.log(clearIndex);
+    myDay[clearIndex].reminder = ""
+    saveReminders();
+    displayReminders();
+    
+})
